@@ -1,0 +1,25 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Signup{% endblock title %}
+{% block content %}
+    <div class='row'>
+        <div class='col-sm-8 offset-2 mb-4'>
+            <h3 class='text-center mt-4'>Signup form</h3>
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {% for fm in form %}
+                    <div class="mb-3">
+                        {{fm.label_tag}} {{fm}} <small class="text-danger"> {{fm.errors | striptags}} </small> 
+                    </div>
+                {% endfor %}
+                <input type="submit" value="Submit" class="btn btn-primary me-4">
+                <a href="{% url 'login' %}">login if registered</a>
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="alert alert-danger my-4">{{error}}</p>
+                    {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}

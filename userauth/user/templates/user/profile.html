@@ -1,0 +1,11 @@
+{% extends 'user/base.html' %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <p {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    <h3>Welcome</h3>
+    <a href="{% url 'logout' %}">logout</a>
+{% endblock content %}

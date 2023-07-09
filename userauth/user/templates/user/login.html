@@ -1,0 +1,31 @@
+{% extends 'user/base.html' %}
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<div class='row'>
+    <div class='col-sm-8 offset-2 mb-4'>
+        <h3 class='text-center mt-4'>Login form</h3>
+        {% if messages %}
+            {% for message in messages %}
+                <p {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-4">{{error}}</p>
+            {% endfor %}
+        {% endif %}
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {% for fm in form %}
+                <div class="mb-3">
+                    {{fm.label_tag}} {{fm}} <small class="text-danger"> {{fm.errors | striptags}} </small>
+                </div>
+            {% endfor %}
+            <input type="submit" value="Submit" class="btn btn-primary me-4">
+            <a href="{% url 'signup' %}">not registered yet?</a>
+            <a href="{% url 'changepassword' %}" class="offset-6">forgot password?</a>
+        </form>
+    </div> 
+</div>
+{% endblock content %}
